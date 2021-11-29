@@ -64,7 +64,7 @@ func (v *Md5Verifier) Check() error {
 		return ErrNoAppId
 	}
 	// 校验签名是否存在
-	if !values.Has("Signture") {
+	if !values.Has("Signature") {
 		return ErrNoSignature
 	}
 
@@ -77,13 +77,13 @@ func (v *Md5Verifier) Check() error {
 		return ErrNoAppSecret
 	}
 
-	signture := values.Get("Signture")
-	values.Del("Signture")
+	signature := values.Get("Signature")
+	values.Del("Signature")
 
 	for i := 0; i < len(ss); i++ {
 		tmp := values
 		tmp.Add("AddSecret", ss[i])
-		if signture == check(tmp) {
+		if signature == check(tmp) {
 			return nil
 		}
 
