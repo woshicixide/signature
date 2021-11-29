@@ -1,5 +1,7 @@
 package signature
 
 type Secret interface {
-	GetAppSecret(appid string) ([]string, error)
+	GetAppSecret() ([]string, error)
+	GetAppid() string
+	SetAppid(appid string)
 }

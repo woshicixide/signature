@@ -72,7 +72,8 @@ func (v *Md5Verifier) Check() error {
 
 	// 获取appsecret
 	appid := values.Get("AppId")
-	ss, err := v.secrets.GetAppSecret(appid)
+	v.secrets.SetAppid(appid)
+	ss, err := v.secrets.GetAppSecret()
 	if err != nil {
 		return ErrNoAppSecret
 	}
