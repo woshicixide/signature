@@ -1,3 +1,3 @@
-module github.com/woshicixide/signture
+module github.com/woshicixide/signature
 
 go 1.17
