@@ -1,7 +1,11 @@
 package signature
 
+import (
+	"context"
+)
+
 type Secret interface {
-	GetAppSecret() ([]string, error)
+	GetAppSecret(ctx context.Context) ([]string, error)
 	GetAppid() string
 	SetAppid(appid string)
 }

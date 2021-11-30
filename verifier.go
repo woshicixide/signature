@@ -1,6 +1,7 @@
 package signature
 
 import (
+	"context"
 	"crypto/md5"
 	"encoding/hex"
 	"net/url"
@@ -14,6 +15,7 @@ import (
 const defaultExpire = 5 * 60 * time.Second
 
 type Md5Verifier struct {
+	ctx      context.Context
 	secrets  Secret //appData允许有多个
 	expire   time.Duration
 	paramStr string
@@ -73,7 +75,7 @@ func (v *Md5Verifier) Check() error {
 	// 获取appsecret
 	appid := values.Get("AppId")
 	v.secrets.SetAppid(appid)
-	ss, err := v.secrets.GetAppSecret()
+	ss, err := v.secrets.GetAppSecret(v.ctx)
 	if err != nil {
 		return ErrNoAppSecret
 	}
